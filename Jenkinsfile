@@ -3,7 +3,8 @@ pipeline {
     stages {
       stage('SCM Checkout') {
         steps {
-           git credentialsId: 'github', url: 'https://github.com/sridhar-modalavalasa/Ansible-web-app' 
+           git credentialsId: 'github'
+           checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/sridhar-modalavalasa/Ansible-web-app']]])  
         }
       }  
       stage('Execute Ansible') {
