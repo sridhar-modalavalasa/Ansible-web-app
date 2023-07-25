@@ -1,0 +1,22 @@
+- name: Configure nginx web server
+  hosts: my-servers
+  become: true
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: update apt
+    apt:
+      update_cache: yes
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: latest
+  - name: Start Nginx
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+  - name: Deploy web app
+    copy:
+      src: index.html
+      dest: /var/www/html/
